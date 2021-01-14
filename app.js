@@ -71,6 +71,14 @@ app.get("/contact",(req,res)=>{
   });
 })
 
+app.post("/", (req, res) => {
+  if (req.body.header === "Work") {
+      res.redirect("/work");
+  } else {
+      res.redirect("/");
+  }
+})
+
 
 
 
