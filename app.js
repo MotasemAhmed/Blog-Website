@@ -3,6 +3,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 
+const posts =[];
+
   // =============================================================================================
 const homeStartingContent = `Lacus vel facilisis volutpat est velit egestas dui id ornare. 
   Semper auctor neque vitae tempus quam. 
@@ -75,7 +77,12 @@ app.get("/compose",(req,res)=>{
   res.render("compose",{});
 })
 app.post("/compose",(req,res)=>{
-  console.log(req.body.inputText);
+  const post = {
+    title: req.body.postTitle,
+    body: req.body.postBody
+  }
+  posts.push(post);
+  res.redirect("/");
 })
 
 
