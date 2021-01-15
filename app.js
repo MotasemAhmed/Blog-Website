@@ -100,12 +100,6 @@ app.post("/compose",(req,res)=>{
 })
 
 
-function truncate(input) {
-  if (input.length > 5) {
-     return input.substring(0, 100) + '...';
-  }
-  return input;
-};
 
 
 app.listen(3000, function () {
