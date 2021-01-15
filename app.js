@@ -1,6 +1,7 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
+const _ = require('lodash');
 const ejs = require("ejs");
 
 const posts =[];
@@ -61,6 +62,19 @@ app.get("/",(req,res)=>{
   });
 })
 
+app.get("/posts/:postId",(req,res)=>{
+  let requestedTitle = _.lowerCase(req.params.postId);
+  posts.forEach((post)=>{
+    const storedTitle = _.lowerCase(post.title);
+    if( storedTitle === requestedTitle){
+      res.render("post",{
+        title: post.title,
+        body: post.body
+      })
+    }
+  })
+})
+
 app.get("/about",(req,res)=>{
   res.render("about",{
     ejsAboutContent: aboutContent
@@ -86,7 +100,12 @@ app.post("/compose",(req,res)=>{
 })
 
 
-
+function truncate(input) {
+  if (input.length > 5) {
+     return input.substring(0, 100) + '...';
+  }
+  return input;
+};
 
 
 app.listen(3000, function () {
